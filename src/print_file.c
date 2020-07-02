@@ -6,13 +6,13 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 15:39:44 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/02 15:53:43 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static t_list	*make_linked_list(DIR *d)
+static t_list	*make_linked_list(int *flag, DIR *d)
 {
 	t_list			*file_list;
 	t_list			*new_file;
@@ -21,7 +21,7 @@ static t_list	*make_linked_list(DIR *d)
 	file_list = NULL;
 	while ((dir = readdir(d)) != NULL)
 	{
-		if (dir->d_name[0] != '.')
+		if (dir->d_name[0] != '.' || flag[2])
 		{
 			if (!(new_file = ft_lstnew(dir->d_name, ft_strlen(dir->d_name) + 1)))
 				exit(42);
@@ -40,7 +40,7 @@ void			print_file(int *flag, char *dir_name)
 	d = opendir(dir_name);
 	if (d)
 	{
-		file_list = make_linked_list(d);
+		file_list = make_linked_list(flag, d);
 		closedir(d);
 		sort_file_list(flag, file_list);
 		cursor = file_list;
