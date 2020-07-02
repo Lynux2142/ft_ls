@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 14:08:44 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:31:17 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_list	*make_linked_list(DIR *d)
 	return (file_list);
 }
 
-void		print_file(char *dir_name)
+void			print_file(char *dir_name)
 {
 	t_list			*file_list;
 	t_list			*cursor;
@@ -48,6 +48,6 @@ void		print_file(char *dir_name)
 			printf("%s%c", cursor->content, 10);
 			cursor = cursor->next;
 		}
+		free_linked_list(&file_list);
 	}
-	//free_linked_list(&file_list);
 }

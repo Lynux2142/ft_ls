@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:16:11 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/01 14:59:23 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:33:42 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	sort_file_list(t_list *file_list)
 		j = file_list;
 		while (j != NULL)
 		{
-			if (i->content && j->content && ft_strcmp(i->content, j->content) < 0)
+			if (i->content && j->content
+				&& ft_strcmp(i->content, j->content) < 0)
 			{
 				tmp = i->content;
 				i->content = j->content;

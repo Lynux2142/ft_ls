@@ -6,13 +6,13 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 14:06:31 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:31:36 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static char	*concat_dir_name(char *previous_dir, char *actual_dir)
+static char		*concat_dir_name(char *previous_dir, char *actual_dir)
 {
 	char	*dir_name;
 
@@ -23,7 +23,7 @@ static char	*concat_dir_name(char *previous_dir, char *actual_dir)
 	return (dir_name);
 }
 
-static char	*get_dir_name(char *path)
+static char		*get_dir_name(char *path)
 {
 	char		*name;
 	const int	path_len = ft_strlen(path);
@@ -48,6 +48,7 @@ static t_list	*make_linked_list(DIR *d, char *dir_name)
 {
 	t_list			*dir_list;
 	t_list			*new_dir;
+	char			*new_dir_name;
 	struct dirent	*dir;
 
 	dir_list = NULL;
@@ -55,15 +56,17 @@ static t_list	*make_linked_list(DIR *d, char *dir_name)
 	{
 		if (dir->d_name[0] != '.' && dir->d_type == 4)
 		{
-			new_dir = ft_lstnew(concat_dir_name(dir_name, dir->d_name),
+			new_dir_name = concat_dir_name(dir_name, dir->d_name);
+			new_dir = ft_lstnew(new_dir_name,
 				ft_strlen(dir_name) + ft_strlen(dir->d_name) + 2);
 			ft_lstadd(&dir_list, new_dir);
+			ft_memdel((void**)&new_dir_name);
 		}
 	}
 	return (dir_list);
 }
 
-void		explore(char *dir_name)
+void			explore(char *dir_name)
 {
 	t_list			*dir_list;
 	t_list			*cursor;
@@ -73,9 +76,9 @@ void		explore(char *dir_name)
 	if (d)
 	{
 		dir_list = make_linked_list(d, dir_name);
-		cursor = dir_list;
 		closedir(d);
 		sort_file_list(dir_list);
+		cursor = dir_list;
 		while (cursor)
 		{
 			printf("%2$c%1$s:%2$c", cursor->content, 10);
@@ -83,8 +86,8 @@ void		explore(char *dir_name)
 			explore(cursor->content);
 			cursor = cursor->next;
 		}
+		free_linked_list(&dir_list);
 	}
 	else
 		printf("ls: %s: %s%c", get_dir_name(dir_name), strerror(errno), 10);
-	//free_linked_list(&dir_list);
 }

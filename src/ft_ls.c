@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 14:00:58 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 13:48:06 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/02 14:30:42 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,5 @@ int		main(int ac, char **av)
 	ft_strcat(dir_name, (ac == 1) ? DEFAULT_PATH : av[1]);
 	print_file(dir_name);
 	explore(dir_name);
-	//while (1);
 	return (0);
 }
