@@ -3,3 +3,4 @@ libft/*
 obj
 obj/*
 ft_ls
+*.swp
