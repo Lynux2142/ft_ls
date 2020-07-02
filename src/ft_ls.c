@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 14:00:58 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 15:38:40 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/02 15:51:03 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		main(int ac, char **av)
 	}
 	else
 	{
-		while (av[i])
+		if (ac - i == 1)
 		{
 			if (!(dir_name = ft_strnew(ft_strlen(av[i])))
 				|| !ft_strcat(dir_name, av[i]))
@@ -40,7 +40,22 @@ int		main(int ac, char **av)
 			print_file(flag, dir_name);
 			if (flag[1])
 				explore(flag, dir_name);
-			++i;
+		}
+		else
+		{
+			while (av[i])
+			{
+				printf("%s:%c", av[i], 10);
+				if (!(dir_name = ft_strnew(ft_strlen(av[i])))
+					|| !ft_strcat(dir_name, av[i]))
+					exit(42);
+				print_file(flag, dir_name);
+				if (flag[1])
+					explore(flag, dir_name);
+				++i;
+				if (ac != i)
+					printf("%c", 10);
+			}
 		}
 	}
 	return (0);
