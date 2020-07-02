@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 14:31:17 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/02 15:39:44 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ static t_list	*make_linked_list(DIR *d)
 	{
 		if (dir->d_name[0] != '.')
 		{
-			new_file = ft_lstnew(dir->d_name, ft_strlen(dir->d_name) + 1);
+			if (!(new_file = ft_lstnew(dir->d_name, ft_strlen(dir->d_name) + 1)))
+				exit(42);
 			ft_lstadd(&file_list, new_file);
 		}
 	}
 	return (file_list);
 }
 
-void			print_file(char *dir_name)
+void			print_file(int *flag, char *dir_name)
 {
 	t_list			*file_list;
 	t_list			*cursor;
@@ -41,7 +42,7 @@ void			print_file(char *dir_name)
 	{
 		file_list = make_linked_list(d);
 		closedir(d);
-		sort_file_list(file_list);
+		sort_file_list(flag, file_list);
 		cursor = file_list;
 		while (cursor)
 		{

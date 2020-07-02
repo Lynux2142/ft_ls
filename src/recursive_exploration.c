@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 14:31:36 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/02 15:43:06 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ static t_list	*make_linked_list(DIR *d, char *dir_name)
 		if (dir->d_name[0] != '.' && dir->d_type == 4)
 		{
 			new_dir_name = concat_dir_name(dir_name, dir->d_name);
-			new_dir = ft_lstnew(new_dir_name,
-				ft_strlen(dir_name) + ft_strlen(dir->d_name) + 2);
+			if (!(new_dir = ft_lstnew(new_dir_name,
+				ft_strlen(dir_name) + ft_strlen(dir->d_name) + 2)))
+				exit(42);
 			ft_lstadd(&dir_list, new_dir);
 			ft_memdel((void**)&new_dir_name);
 		}
@@ -66,7 +67,7 @@ static t_list	*make_linked_list(DIR *d, char *dir_name)
 	return (dir_list);
 }
 
-void			explore(char *dir_name)
+void			explore(int *flag, char *dir_name)
 {
 	t_list			*dir_list;
 	t_list			*cursor;
@@ -77,13 +78,13 @@ void			explore(char *dir_name)
 	{
 		dir_list = make_linked_list(d, dir_name);
 		closedir(d);
-		sort_file_list(dir_list);
+		sort_file_list(flag, dir_list);
 		cursor = dir_list;
 		while (cursor)
 		{
 			printf("%2$c%1$s:%2$c", cursor->content, 10);
-			print_file(cursor->content);
-			explore(cursor->content);
+			print_file(flag, cursor->content);
+			explore(flag, cursor->content);
 			cursor = cursor->next;
 		}
 		free_linked_list(&dir_list);
