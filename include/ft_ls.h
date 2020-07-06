@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 15:39:55 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/06 14:42:21 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 # include <stdio.h>
 
-#define DEFAULT_PATH "."
-#define FLAG_LIST "lRart"
+# define DEFAULT_PATH	"."
+# define FLAG_LIST		"lRart"
 
 void			sort_file_list(int *flag, t_list *file_list);
 void			print_file(int *flag, char *dir_name);

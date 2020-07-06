@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/06 14:36:54 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/06 14:50:30 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,10 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 	dir_list = NULL;
 	while ((dir = readdir(d)) != NULL)
 	{
-		if ((dir->d_name[0] != '.' || flag[2]) && dir->d_type == 4)
+		if ((dir->d_name[0] != '.' || flag[2]) && dir->d_type == 4
+			&& !((dir->d_name[0] == '.' && ft_strlen(dir->d_name) == 1)
+			|| (dir->d_name[0] == '.' && dir->d_name[1] == '.'
+			&& ft_strlen(dir->d_name) == 2)))
 		{
 			new_dir_name = concat_dir_name(dir_name, dir->d_name);
 			if (!(new_dir = ft_lstnew(new_dir_name,
@@ -74,8 +77,7 @@ void			explore(int *flag, char *dir_name)
 	DIR				*d;
 	char			*err_file;
 
-	d = opendir(dir_name);
-	if (d)
+	if ((d = opendir(dir_name)))
 	{
 		dir_list = make_linked_list(flag, d, dir_name);
 		closedir(d);
