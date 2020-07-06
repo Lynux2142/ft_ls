@@ -6,22 +6,11 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/06 14:50:30 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/06 14:58:37 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-static char		*concat_dir_name(char *previous_dir, char *actual_dir)
-{
-	char	*dir_name;
-
-	dir_name = ft_strnew(ft_strlen(previous_dir) + ft_strlen(actual_dir) + 2);
-	ft_strcat(dir_name, previous_dir);
-	ft_strcat(dir_name, "/");
-	ft_strcat(dir_name, actual_dir);
-	return (dir_name);
-}
 
 static char		*get_dir_name(char *path)
 {
@@ -59,7 +48,7 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 			|| (dir->d_name[0] == '.' && dir->d_name[1] == '.'
 			&& ft_strlen(dir->d_name) == 2)))
 		{
-			new_dir_name = concat_dir_name(dir_name, dir->d_name);
+			new_dir_name = concat_path_and_file(dir_name, dir->d_name);
 			if (!(new_dir = ft_lstnew(new_dir_name,
 				ft_strlen(dir_name) + ft_strlen(dir->d_name) + 2)))
 				exit(42);
