@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/02 15:53:24 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/06 14:36:54 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void			explore(int *flag, char *dir_name)
 	t_list			*dir_list;
 	t_list			*cursor;
 	DIR				*d;
+	char			*err_file;
 
 	d = opendir(dir_name);
 	if (d)
@@ -90,5 +91,9 @@ void			explore(int *flag, char *dir_name)
 		free_linked_list(&dir_list);
 	}
 	else
-		printf("ls: %s: %s%c", get_dir_name(dir_name), strerror(errno), 10);
+	{
+		err_file = get_dir_name(dir_name);
+		fprintf(stderr, "ls: %s: %s%c", err_file, strerror(errno), 10);
+		free(err_file);
+	}
 }
