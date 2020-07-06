@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:16:11 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/06 14:35:00 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/06 16:01:33 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	sort_file_list(int *flag, t_list *file_list)
 		while (j != NULL)
 		{
 			if (i->content && j->content
-				&& (flag[3] ? ft_strcmp(i->content, j->content) > 0 :
-				ft_strcmp(i->content, j->content) < 0))
+				&& (flag[3] ? ft_strcmp(((t_file*)i->content)->name, ((t_file*)j->content)->name) > 0 :
+				ft_strcmp(((t_file*)i->content)->name, ((t_file*)j->content)->name) < 0))
 			{
 				tmp = i->content;
 				i->content = j->content;

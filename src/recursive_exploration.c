@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/06 14:58:37 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/06 16:38:59 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 {
 	t_list			*dir_list;
 	t_list			*new_dir;
-	char			*new_dir_name;
 	struct dirent	*dir;
+	t_file			*data;
 
 	dir_list = NULL;
 	while ((dir = readdir(d)) != NULL)
@@ -48,12 +48,12 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 			|| (dir->d_name[0] == '.' && dir->d_name[1] == '.'
 			&& ft_strlen(dir->d_name) == 2)))
 		{
-			new_dir_name = concat_path_and_file(dir_name, dir->d_name);
-			if (!(new_dir = ft_lstnew(new_dir_name,
-				ft_strlen(dir_name) + ft_strlen(dir->d_name) + 2)))
+			data = (t_file*)malloc(sizeof(t_file));
+			data->name = concat_path_and_file(dir_name, dir->d_name);
+			if (!(new_dir = ft_lstnew(data, sizeof(t_file*))))
 				exit(42);
 			ft_lstadd(&dir_list, new_dir);
-			ft_memdel((void**)&new_dir_name);
+			free(&((t_file*)data)->name);
 		}
 	}
 	return (dir_list);
@@ -74,9 +74,9 @@ void			explore(int *flag, char *dir_name)
 		cursor = dir_list;
 		while (cursor)
 		{
-			printf("%2$c%1$s:%2$c", cursor->content, 10);
-			print_file(flag, cursor->content);
-			explore(flag, cursor->content);
+			printf("%2$c%1$s:%2$c", ((t_file*)cursor->content)->name, 10);
+			print_file(flag, ((t_file*)cursor->content)->name);
+			explore(flag, ((t_file*)cursor->content)->name);
 			cursor = cursor->next;
 		}
 		free_linked_list(&dir_list);

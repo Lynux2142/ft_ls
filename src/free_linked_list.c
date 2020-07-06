@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:52:50 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/01 14:48:11 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/06 16:35:24 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	free_linked_list(t_list **list)
 	{
 		tmp = current;
 		current = current->next;
+		ft_memdel((void**)&((t_file*)tmp->content)->name);
 		ft_memdel((void**)&tmp->content);
 		ft_memdel((void**)&tmp);
 	}
