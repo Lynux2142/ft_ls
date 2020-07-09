@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/09 15:18:11 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:31:10 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 void			print_file(int *flag, char *dir_name)
 {
 	t_list			*file_list;
-	t_list			*cursor;
 	DIR				*d;
 
 	d = opendir(dir_name);
@@ -53,23 +52,10 @@ void			print_file(int *flag, char *dir_name)
 		file_list = make_linked_list(flag, d, dir_name);
 		closedir(d);
 		sort_file_list(flag, file_list);
-		cursor = file_list;
-		while (cursor)
-		{
-			printf( (S_ISDIR(((t_file*)cursor->content)->stat->st_mode)) ? "d" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IRUSR) ? "r" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IWUSR) ? "w" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IXUSR) ? "x" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IRGRP) ? "r" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IWGRP) ? "w" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IXGRP) ? "x" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IROTH) ? "r" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IWOTH) ? "w" : "-");
-			printf( (((t_file*)cursor->content)->stat->st_mode & S_IXOTH) ? "x" : "-");
-			printf("  ");
-			printf("%s%c", ((t_file*)cursor->content)->name, 10);
-			cursor = cursor->next;
-		}
+		if (flag[0])
+			full_print(file_list);
+		else
+			simple_print(file_list);
 		free_linked_file_list(&file_list);
 	}
 }

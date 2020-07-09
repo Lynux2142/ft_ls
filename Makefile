@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 14:00:46 by lguiller          #+#    #+#              #
-#    Updated: 2020/07/06 14:58:52 by lguiller         ###   ########.fr        #
+#    Updated: 2020/07/09 15:23:20 by lguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS1			+= recursive_exploration.c
 SRCS1			+= free_linked_list.c
 SRCS1			+= flag_parsing.c
 SRCS1			+= concat_path_and_file.c
+SRCS1			+= print_tools.c
 
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS1))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS1:.c=.o))

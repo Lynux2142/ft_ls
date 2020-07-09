@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/09 15:18:34 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/09 15:30:22 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,7 @@ void			free_linked_file_list(t_list **list);
 void			free_linked_dir_list(t_list **list);
 int				*get_flag(char **av);
 char			*concat_path_and_file(char *path, char *filename);
+void			simple_print(t_list *file_list);
+void			full_print(t_list *file_list);
 
 #endif
