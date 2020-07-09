@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/09 15:31:10 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/09 16:55:07 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 			data = (t_file*)malloc(sizeof(t_file));
 			data->name = ft_strnew(ft_strlen(dir->d_name));
 			data->stat = (struct stat*)malloc(sizeof(struct stat));
-			stat(full_path, data->stat);
 			ft_memcpy(data->name, dir->d_name, ft_strlen(dir->d_name));
+			lstat(full_path, data->stat);
 			if (!(new_file = ft_lstnew(data, sizeof(t_file))))
 				exit(42);
 			ft_lstadd(&file_list, new_file);
