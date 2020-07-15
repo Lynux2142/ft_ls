@@ -6,11 +6,34 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/10 13:42:21 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/15 15:26:13 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static char		*create_name(char *full_path, char *file_name)
+{
+	char	*name;
+	char	*buf;
+	ssize_t	size;
+	int		test;
+
+	if (!(buf = (char*)malloc(sizeof(char) * BUFF_SIZE)))
+		exit(42);
+	ft_bzero(buf, BUFF_SIZE);
+	size = readlink(full_path, buf, BUFF_SIZE);
+	test = ft_strlen(file_name) + ((size > 0) ? (size + 4) : 0);
+	name = ft_strnew(test);
+	ft_strcat(name, file_name);
+	if (size > 0)
+	{
+		ft_strcat(name, " -> ");
+		ft_strcat(name, buf);
+	}
+	ft_memdel((void**)&buf);
+	return (name);
+}
 
 static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 {
@@ -27,15 +50,13 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 		{
 			full_path = concat_path_and_file(dir_name, dir->d_name);
 			data = (t_file*)malloc(sizeof(t_file));
-			data->name = ft_strnew(ft_strlen(dir->d_name));
+			data->name = create_name(full_path, dir->d_name);
 			data->stat = (struct stat*)malloc(sizeof(struct stat));
-			ft_memcpy(data->name, dir->d_name, ft_strlen(dir->d_name));
 			lstat(full_path, data->stat);
 			if (!(new_file = ft_lstnew(data, sizeof(t_file))))
 				exit(42);
 			ft_lstadd(&file_list, new_file);
-			ft_memdel((void**)&data);
-			ft_memdel((void**)&full_path);
+			free_data(data, full_path);
 		}
 	}
 	return (file_list);

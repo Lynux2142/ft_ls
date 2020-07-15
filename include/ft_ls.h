@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/15 14:07:18 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/15 14:50:32 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ void					print_right(mode_t mode);
 void					print_uid_gid(long *max_len, struct stat stat);
 long					get_month_diff(long file_rawtime);
 void					free_time(char **file_date, char **file_time);
+void					free_data(t_file *data, char *full_path);
 
 #endif
