@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_linked_list.c                                 :+:      :+:    :+:   */
+/*   free_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/30 15:52:50 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/09 15:18:03 by lguiller         ###   ########.fr       */
+/*   Created: 2020/07/15 14:01:52 by lguiller          #+#    #+#             */
+/*   Updated: 2020/07/15 14:07:04 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,18 @@ void	free_linked_dir_list(t_list **list)
 		ft_memdel((void**)&tmp->content);
 		ft_memdel((void**)&tmp);
 	}
+}
+
+void	free_time(char **file_date, char **file_time)
+{
+	int i;
+
+	i = -1;
+	while (file_date[++i])
+		ft_memdel((void**)&file_date[i]);
+	ft_memdel((void**)&file_date);
+	i = -1;
+	while (file_time[++i])
+		ft_memdel((void**)&file_time[i]);
+	ft_memdel((void**)&file_time);
 }

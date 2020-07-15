@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/09 16:55:07 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/10 13:42:21 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 void			print_file(int *flag, char *dir_name)
 {
 	t_list			*file_list;
+	t_list			*cursor;
 	DIR				*d;
 
 	d = opendir(dir_name);
@@ -55,7 +56,14 @@ void			print_file(int *flag, char *dir_name)
 		if (flag[0])
 			full_print(file_list);
 		else
-			simple_print(file_list);
+		{
+			cursor = file_list;
+			while (cursor)
+			{
+				printf("%s%c", ((t_file*)cursor->content)->name, 10);
+				cursor = cursor->next;
+			}
+		}
 		free_linked_file_list(&file_list);
 	}
 }

@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 14:00:46 by lguiller          #+#    #+#              #
-#    Updated: 2020/07/09 15:23:20 by lguiller         ###   ########.fr        #
+#    Updated: 2020/07/15 14:02:36 by lguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,10 +21,12 @@ SRCS1			= ft_ls.c
 SRCS1			+= sort_file.c
 SRCS1			+= print_file.c
 SRCS1			+= recursive_exploration.c
-SRCS1			+= free_linked_list.c
+SRCS1			+= free_function.c
 SRCS1			+= flag_parsing.c
 SRCS1			+= concat_path_and_file.c
 SRCS1			+= print_tools.c
+SRCS1			+= print_tools2.c
+SRCS1			+= get_length.c
 
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS1))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS1:.c=.o))
@@ -37,7 +39,7 @@ INCLUDES_DIR	= ./include
 LIBFT			= $(LIBFT_DIR)/libft.a
 HEADER			= $(INCLUDES_DIR)/ft_ls.h
 
-FLAGS			= -Wall -Wextra -Werror -g
+FLAGS			= -Wall -Wextra -g
 CC				= clang
 
 INCLUDES		= $(addprefix -I, $(INCLUDES_DIR) $(LIBFT_DIR))

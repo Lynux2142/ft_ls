@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   concat_path_and_file.c                             :+:      :+:    :+:   */
+/*   get_length.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/06 14:56:14 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/10 15:25:35 by lguiller         ###   ########.fr       */
+/*   Created: 2020/07/10 14:16:16 by lguiller          #+#    #+#             */
+/*   Updated: 2020/07/10 14:21:02 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-char	*concat_path_and_file(char *path, char *filename)
+int	nb_len(int nb)
 {
-	char	*dir_name;
+	int res;
 
-	dir_name = ft_strnew(ft_strlen(path) + ft_strlen(filename) + 2);
-	ft_strcat(dir_name, path);
-	ft_strcat(dir_name, "/");
-	ft_strcat(dir_name, filename);
-	return (dir_name);
+	res = 0;
+	while (nb)
+	{
+		++res;
+		nb /= 10;
+	}
+	return (res);
 }
