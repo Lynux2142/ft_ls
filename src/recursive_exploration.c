@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 13:42:31 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:42:34 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 static char		*get_dir_name(char *path)
 {
-	char		*name;
-	const int	path_len = ft_strlen(path);
-	int			i;
-	int			j;
+	char	*name;
+	int		path_len;
+	int		i;
+	int		j;
 
+	path_len = ft_strlen(path);
 	i = path_len - 1;
 	while (path[i])
 	{
@@ -26,7 +27,8 @@ static char		*get_dir_name(char *path)
 			break ;
 		--i;
 	}
-	name = ft_strnew(path_len - 1 - i);
+	if (!(name = ft_strnew(path_len - 1 - i)))
+		exit(42);
 	j = 0;
 	while (path[++i])
 		name[j++] = path[i];
@@ -48,9 +50,10 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 			|| (dir->d_name[0] == '.' && dir->d_name[1] == '.'
 			&& ft_strlen(dir->d_name) == 2)))
 		{
-			data = (t_file*)malloc(sizeof(t_file));
+			if (!(data = (t_file*)malloc(sizeof(t_file)))
+				|| !(data->stat = (struct stat*)malloc(sizeof(struct stat))))
+				exit(42);
 			data->name = concat_path_and_file(dir_name, dir->d_name);
-			data->stat = (struct stat*)malloc(sizeof(struct stat));
 			lstat(data->name, data->stat);
 			if (!(new_dir = ft_lstnew(data, sizeof(t_file))))
 				exit(42);
@@ -59,6 +62,13 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 		}
 	}
 	return (dir_list);
+}
+
+static void		print(int *flag, t_file *content)
+{
+	printf("%2$c%1$s:%2$c", content->name, 10);
+	print_file(flag, content->name);
+	explore(flag, content->name);
 }
 
 void			explore(int *flag, char *dir_name)
@@ -76,9 +86,7 @@ void			explore(int *flag, char *dir_name)
 		cursor = dir_list;
 		while (cursor)
 		{
-			printf("%2$c%1$s:%2$c", ((t_file*)cursor->content)->name, 10);
-			print_file(flag, ((t_file*)cursor->content)->name);
-			explore(flag, ((t_file*)cursor->content)->name);
+			print(flag, ((t_file*)cursor->content));
 			cursor = cursor->next;
 		}
 		free_linked_list(&dir_list);

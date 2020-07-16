@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:40:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/15 13:59:22 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:38:22 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,9 @@ void	print_uid_gid(long *max_len, struct stat stat)
 	struct passwd	*uid;
 	struct group	*gid;
 
-	uid = getpwuid((long)stat.st_uid);
-	gid = getgrgid((long)stat.st_gid);
+	if (!(uid = getpwuid((long)stat.st_uid))
+		|| !(gid = getgrgid((long)stat.st_gid)))
+		exit(42);
 	put_n_space(1);
 	printf("%s", uid->pw_name);
 	put_n_space(max_len[2] - (long)ft_strlen(uid->pw_name) + 1);

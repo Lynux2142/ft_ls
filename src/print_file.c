@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 13:42:41 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:42:49 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static char		*create_name(int *flag, char *full_path, char *file_name)
 	if (flag[0])
 		size = readlink(full_path, buf, BUFF_SIZE);
 	test = ft_strlen(file_name) + ((size > 0) ? (size + 4) : 0);
-	name = ft_strnew(test);
+	if (!(name = ft_strnew(test)))
+		exit(42);
 	ft_strcat(name, file_name);
 	if (size > 0)
 	{
@@ -51,9 +52,10 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 		if (dir->d_name[0] != '.' || flag[2])
 		{
 			full_path = concat_path_and_file(dir_name, dir->d_name);
-			data = (t_file*)malloc(sizeof(t_file));
+			if (!(data = (t_file*)malloc(sizeof(t_file)))
+				|| !(data->stat = (struct stat*)malloc(sizeof(struct stat))))
+				exit(42);
 			data->name = create_name(flag, full_path, dir->d_name);
-			data->stat = (struct stat*)malloc(sizeof(struct stat));
 			lstat(full_path, data->stat);
 			if (!(new_file = ft_lstnew(data, sizeof(t_file))))
 				exit(42);

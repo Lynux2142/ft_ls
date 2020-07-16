@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 15:22:47 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 14:14:48 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:31:41 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ static void	print_time(long rawtime)
 	char	**file_date;
 	char	**file_time;
 
-	date = ctime(&rawtime);
-	file_date = ft_split_whitespaces(date);
-	file_time = ft_strsplit(file_date[3], ':');
+	if (!(date = ctime(&rawtime))
+		|| !(file_date = ft_split_whitespaces(date))
+		|| !(file_time = ft_strsplit(file_date[3], ':')))
+		exit(42);
 	put_n_space(1);
 	printf("%s", file_date[1]);
 	put_n_space(2 - ft_strlen(file_date[2]) + 1);
@@ -40,29 +41,35 @@ static void	print_time(long rawtime)
 	free_time(file_date, file_time);
 }
 
+static void	set_value(long *max_len, struct stat stat)
+{
+	long tmp;
+
+	if ((tmp = nb_len((long)stat.st_nlink)) > max_len[1])
+		max_len[1] = tmp;
+	if ((tmp = (long)ft_strlen(getpwuid((long)stat.st_uid)->pw_name))
+		> max_len[2])
+		max_len[2] = tmp;
+	if ((tmp = (long)ft_strlen(getgrgid((long)stat.st_gid)->gr_name))
+		> max_len[3])
+		max_len[3] = tmp;
+	if ((tmp = nb_len((long)stat.st_size)) > max_len[4])
+		max_len[4] = tmp;
+}
+
 static long	*set_max_len(t_list *file_list)
 {
-	struct stat	stat;
 	long		*max_len;
-	long		tmp;
 	int			i;
 
-	max_len = (long*)malloc(sizeof(long) * 5);
+	if (!(max_len = (long*)malloc(sizeof(long) * 5)))
+		exit(42);
 	i = -1;
 	while (++i < 5)
 		max_len[i] = 0;
 	while (file_list)
 	{
-		stat = *((t_file*)file_list->content)->stat;
-		max_len[0] = 10;
-		if ((tmp = nb_len((long)stat.st_nlink)) > max_len[1])
-			max_len[1] = tmp;
-		if ((tmp = (long)ft_strlen(getpwuid((long)stat.st_uid)->pw_name)) > max_len[2])
-			max_len[2] = tmp;
-		if ((tmp = (long)ft_strlen(getgrgid((long)stat.st_gid)->gr_name)) > max_len[3])
-			max_len[3] = tmp;
-		if ((tmp = nb_len((long)stat.st_size)) > max_len[4])
-			max_len[4] = tmp;
+		set_value(max_len, *((t_file*)file_list->content)->stat);
 		file_list = file_list->next;
 	}
 	return (max_len);
