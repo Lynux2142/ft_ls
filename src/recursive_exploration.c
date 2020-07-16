@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/10 16:04:35 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 13:42:31 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 		{
 			data = (t_file*)malloc(sizeof(t_file));
 			data->name = concat_path_and_file(dir_name, dir->d_name);
-			data->stat = NULL;
-			if (!(new_dir = ft_lstnew(data, sizeof(t_file*))))
+			data->stat = (struct stat*)malloc(sizeof(struct stat));
+			lstat(data->name, data->stat);
+			if (!(new_dir = ft_lstnew(data, sizeof(t_file))))
 				exit(42);
 			ft_lstadd(&dir_list, new_dir);
-			free(&((t_file*)data)->name);
+			ft_memdel((void**)&data);
 		}
 	}
 	return (dir_list);
@@ -80,7 +81,7 @@ void			explore(int *flag, char *dir_name)
 			explore(flag, ((t_file*)cursor->content)->name);
 			cursor = cursor->next;
 		}
-		free_linked_dir_list(&dir_list);
+		free_linked_list(&dir_list);
 	}
 	else
 	{

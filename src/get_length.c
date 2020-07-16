@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/10 14:16:16 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/10 14:21:02 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:14:23 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	nb_len(int nb)
 {
 	int res;
 
+	if (nb == 0)
+		return (1);
 	res = 0;
 	while (nb)
 	{

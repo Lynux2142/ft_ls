@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:16:11 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/15 15:54:35 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:04:10 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@ static int	switch_test(int *flag, t_file *a, t_file *b)
 {
 	int cmp;
 
-	cmp = 0;
 	if (flag[4])
-		cmp = b->stat->st_mtime - a->stat->st_mtime;
-	if (cmp == 0 || !flag[4])
+	{
+		if ((cmp = b->stat->st_mtime - a->stat->st_mtime) == 0)
+			cmp = ft_strcmp(a->name, b->name);
+	}
+	else
 		cmp = ft_strcmp(a->name, b->name);
 	return (flag[3] ? cmp > 0 : cmp < 0);
 }

@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/15 15:59:08 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 13:42:41 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ void			print_file(int *flag, char *dir_name)
 				cursor = cursor->next;
 			}
 		}
-		free_linked_file_list(&file_list);
+		free_linked_list(&file_list);
 	}
 }
