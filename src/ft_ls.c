@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 14:00:58 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 13:39:07 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 15:00:46 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		main(int ac, char **av)
 
 	flag = get_flag(av);
 	i = 1;
-	while (av[i] && av[i][0] == '-')
+	while (av[i] && av[i][0] == '-' && ft_strlen(av[i]) > 1)
 		++i;
 	if (ac == i)
 	{

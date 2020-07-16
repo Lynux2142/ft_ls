@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 14:42:49 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/16 14:58:40 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,22 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 	return (file_list);
 }
 
+static void		print(t_list *cursor)
+{
+	while (cursor)
+	{
+		printf("%s%c", ((t_file*)cursor->content)->name, 10);
+		cursor = cursor->next;
+	}
+}
+
 void			print_file(int *flag, char *dir_name)
 {
-	t_list			*file_list;
-	t_list			*cursor;
-	DIR				*d;
+	t_list	*file_list;
+	DIR		*d;
+	char	*err_file;
 
-	d = opendir(dir_name);
-	if (d)
+	if ((d = opendir(dir_name)))
 	{
 		file_list = make_linked_list(flag, d, dir_name);
 		closedir(d);
@@ -81,14 +89,13 @@ void			print_file(int *flag, char *dir_name)
 		if (flag[0])
 			full_print(file_list);
 		else
-		{
-			cursor = file_list;
-			while (cursor)
-			{
-				printf("%s%c", ((t_file*)cursor->content)->name, 10);
-				cursor = cursor->next;
-			}
-		}
+			print(file_list);
 		free_linked_list(&file_list);
+	}
+	else
+	{
+		err_file = get_dir_name(dir_name);
+		fprintf(stderr, "ls: %s: %s%c", err_file, strerror(errno), 10);
+		free(err_file);
 	}
 }

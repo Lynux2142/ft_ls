@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 14:00:46 by lguiller          #+#    #+#              #
-#    Updated: 2020/07/15 14:02:36 by lguiller         ###   ########.fr        #
+#    Updated: 2020/07/16 15:05:01 by lguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS1			+= concat_path_and_file.c
 SRCS1			+= print_tools.c
 SRCS1			+= print_tools2.c
 SRCS1			+= get_length.c
+SRCS1			+= get_dir_name.c
 
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS1))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS1:.c=.o))
