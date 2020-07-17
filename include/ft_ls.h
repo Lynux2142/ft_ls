@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 14:55:14 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/17 13:27:11 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,6 @@ long					get_month_diff(long file_rawtime);
 void					free_time(char **file_date, char **file_time);
 void					free_data(t_file *data, char *full_path);
 char					*get_dir_name(char *path);
+void					print_error(char *file_name, int errnum);
 
 #endif
