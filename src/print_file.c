@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/17 13:28:16 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/17 15:42:44 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 	return (file_list);
 }
 
-static void		print(t_list *cursor)
+void			print_files(t_list *cursor)
 {
 	while (cursor)
 	{
@@ -88,7 +88,7 @@ void			print_file(int *flag, char *dir_name)
 		if (flag[0])
 			full_print(file_list);
 		else
-			print(file_list);
+			print_files(file_list);
 		free_linked_list(&file_list);
 	}
 	else
