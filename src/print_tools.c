@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 15:22:47 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 14:31:41 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 13:38:45 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,26 @@ static void	set_value(long *max_len, struct stat stat)
 
 static long	*set_max_len(t_list *file_list)
 {
-	long		*max_len;
-	int			i;
+	long			*max_len;
+	int				i;
+	unsigned int	total;
+	int				is_list_empty;
 
 	if (!(max_len = (long*)malloc(sizeof(long) * 5)))
 		exit(42);
 	i = -1;
 	while (++i < 5)
 		max_len[i] = 0;
+	is_list_empty = (file_list != NULL);
+	total = 0;
 	while (file_list)
 	{
+		total += ((t_file*)file_list->content)->stat->st_blocks;
 		set_value(max_len, *((t_file*)file_list->content)->stat);
 		file_list = file_list->next;
 	}
+	if (is_list_empty)
+		printf("total %u\n", total);
 	return (max_len);
 }
 
