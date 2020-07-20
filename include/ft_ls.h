@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/17 14:45:44 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 14:49:41 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,10 @@ char					*get_dir_name(char *path);
 void					print_error(char *file_name, int errnum);
 void					print_files(t_list *cursor);
 void					full_print(t_list *cursor);
+void					make_file_linked_list(t_list **list, char *file_name);
+void					make_dir_linked_list(t_list **list, char *file_name);
+void					make_err_linked_list(t_list **list, char *file_name);
+void					start_print(int *flag, t_list *err_list,
+							t_list *file_list, t_list *dir_list);
 
 #endif
