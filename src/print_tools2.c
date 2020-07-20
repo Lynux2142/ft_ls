@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:40:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 14:38:22 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 13:53:22 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,16 @@ void	print_right(mode_t mode)
 {
 	printf(mode & S_IRUSR ? "r" : "-");
 	printf(mode & S_IWUSR ? "w" : "-");
-	printf(mode & S_IXUSR ? "x" : "-");
+	if (mode & S_IXUSR)
+		printf(mode & S_ISUID ? "s" : "x");
+	else
+		printf(mode & S_ISUID ? "S" : "-");
 	printf(mode & S_IRGRP ? "r" : "-");
 	printf(mode & S_IWGRP ? "w" : "-");
-	printf(mode & S_IXGRP ? "x" : "-");
+	if (mode & S_IXGRP)
+		printf(mode & S_ISGID ? "s" : "x");
+	else
+		printf(mode & S_ISGID ? "S" : "-");
 	printf(mode & S_IROTH ? "r" : "-");
 	printf(mode & S_IWOTH ? "w" : "-");
 	printf(mode & S_IXOTH ? "x" : "-");
