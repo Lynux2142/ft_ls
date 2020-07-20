@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/02 14:44:08 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/06 16:41:27 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 14:58:46 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@ void	parse_flag(int *flag, char *av)
 			flag[value] = 1;
 		else
 		{
-			printf("ls: illegal option -- %c%c", av[i], 10);
-			printf("usage: ft_ls [-Ralrt] [file ...]%c", 10);
+			ft_putstr("ls: illegal option -- ");
+			ft_putendl(av + i);
+			ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
 			exit(42);
 		}
 	}

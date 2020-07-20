@@ -6,11 +6,28 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 15:22:47 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 13:38:45 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 15:16:42 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static void	print_hour(long rawtime, char **file_date, char **file_time)
+{
+	if (get_month_diff(rawtime) > 6)
+	{
+		put_n_space(1);
+		ft_putstr(file_date[4]);
+		ft_putstr(" ");
+	}
+	else
+	{
+		ft_putstr(file_time[0]);
+		ft_putstr(":");
+		ft_putstr(file_time[1]);
+		ft_putstr(" ");
+	}
+}
 
 static void	print_time(long rawtime)
 {
@@ -23,21 +40,11 @@ static void	print_time(long rawtime)
 		|| !(file_time = ft_strsplit(file_date[3], ':')))
 		exit(42);
 	put_n_space(1);
-	printf("%s", file_date[1]);
+	ft_putstr(file_date[1]);
 	put_n_space(2 - ft_strlen(file_date[2]) + 1);
-	printf("%s", file_date[2]);
+	ft_putstr(file_date[2]);
 	put_n_space(1);
-	if (get_month_diff(rawtime) > 6)
-	{
-		put_n_space(1);
-		printf("%s ", file_date[4]);
-	}
-	else
-	{
-		printf("%s", file_time[0]);
-		printf(":");
-		printf("%s ", file_time[1]);
-	}
+	print_hour(rawtime, file_date, file_time);
 	free_time(file_date, file_time);
 }
 
@@ -78,7 +85,11 @@ static long	*set_max_len(t_list *file_list)
 		file_list = file_list->next;
 	}
 	if (is_list_empty)
-		printf("total %u\n", total);
+	{
+		ft_putstr("total ");
+		ft_putnbr((int)total);
+		ft_putstr("\n");
+	}
 	return (max_len);
 }
 
@@ -94,12 +105,12 @@ void		full_print(t_list *file_list)
 		print_mode(stat.st_mode);
 		print_right(stat.st_mode);
 		put_n_space(max_len[1] - nb_len((long)stat.st_nlink) + 2);
-		printf("%ld", (long)stat.st_nlink);
+		ft_putnbr((int)stat.st_nlink);
 		print_uid_gid(max_len, stat);
 		put_n_space(max_len[4] - nb_len((long)stat.st_size));
-		printf("%ld", (long)stat.st_size);
+		ft_putnbr((int)stat.st_size);
 		print_time(stat.st_mtime);
-		printf("%s%c", ((t_file*)file_list->content)->name, 10);
+		ft_putendl(((t_file*)file_list->content)->name);
 		file_list = file_list->next;
 	}
 	ft_memdel((void**)&max_len);

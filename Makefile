@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 14:00:46 by lguiller          #+#    #+#              #
-#    Updated: 2020/07/20 14:50:26 by lguiller         ###   ########.fr        #
+#    Updated: 2020/07/20 16:22:58 by lguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ SRCS1			+= print_tools2.c
 SRCS1			+= get_length.c
 SRCS1			+= get_dir_name.c
 SRCS1			+= print_error.c
-SRCS1			+= test_print_args.c
+SRCS1			+= create_print_args.c
+SRCS1			+= tools.c
 
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS1))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRCS1:.c=.o))

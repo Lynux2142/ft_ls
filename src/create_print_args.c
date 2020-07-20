@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_print_args.c                                  :+:      :+:    :+:   */
+/*   create_print_args.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:43:14 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 14:51:17 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 16:28:56 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,18 @@ void		make_err_linked_list(t_list **list, char *name)
 	ft_memdel((void**)&data);
 }
 
-static int	get_nb_file(t_list *err_list, t_list *file_list, t_list *dir_list)
+static void print_dir(int *flag, t_list *dir_list, int nb_file)
 {
-	int i;
-
-	i = 0;
-	while (err_list)
+	if (nb_file > 1)
 	{
-		++i;
-		err_list = err_list->next;
+		ft_putstr(((t_file*)dir_list->content)->name);
+		ft_putendl(":");
 	}
-	while (file_list)
-	{
-		++i;
-		file_list = file_list->next;
-	}
-	while (dir_list)
-	{
-		++i;
-		dir_list = dir_list->next;
-	}
-	return (i);
+	print_file(flag, ((t_file*)dir_list->content)->name);
+	if (flag[1])
+		explore(flag, ((t_file*)dir_list->content)->name);
+	if (dir_list->next)
+		ft_putstr("\n");
 }
 
 void		start_print(int *flag, t_list *err_list,
@@ -93,26 +84,23 @@ void		start_print(int *flag, t_list *err_list,
 {
 	int	nb_file;
 
-	nb_file = get_nb_file(err_list, file_list, dir_list);
+	nb_file = list_len(err_list) + list_len(file_list) + list_len(dir_list);
 	sort_file_list(flag, err_list);
 	sort_file_list(flag, file_list);
 	sort_file_list(flag, dir_list);
 	while (err_list)
 	{
-		printf("%s\n", ((t_file*)err_list->content)->name);
+		ft_putendl(((t_file*)err_list->content)->name);
 		err_list = err_list->next;
 	}
-	(flag[0]) ? full_print(file_list) : print_files(file_list);
-	printf((file_list && dir_list) ? "\n" : "");
+	if (flag[0])
+		full_print(file_list);
+	else
+		print_files(file_list);
+	ft_putstr((file_list && dir_list) ? "\n" : "");
 	while (dir_list)
 	{
-		if (nb_file > 1)
-			printf("%s:%c", ((t_file*)dir_list->content)->name, 10);
-		print_file(flag, ((t_file*)dir_list->content)->name);
-		if (flag[1])
-			explore(flag, ((t_file*)dir_list->content)->name);
-		if (dir_list->next)
-			printf("\n");
+		print_dir(flag, dir_list, nb_file);
 		dir_list = dir_list->next;
 	}
 }

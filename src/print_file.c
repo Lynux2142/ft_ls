@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:19:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 13:16:07 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 15:02:48 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			print_files(t_list *cursor)
 {
 	while (cursor)
 	{
-		printf("%s%c", ((t_file*)cursor->content)->name, 10);
+		ft_putendl(((t_file*)cursor->content)->name);
 		cursor = cursor->next;
 	}
 }

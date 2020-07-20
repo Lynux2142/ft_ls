@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:40:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 13:53:22 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 15:07:57 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,44 +18,44 @@ void	put_n_space(long n)
 
 	i = -1;
 	while (n < 20 && ++i < n)
-		printf(" ");
+		ft_putstr(" ");
 }
 
 void	print_mode(mode_t mode)
 {
 	if (S_ISBLK(mode))
-		printf("b");
+		ft_putstr("b");
 	else if (S_ISCHR(mode))
-		printf("c");
+		ft_putstr("c");
 	else if (S_ISFIFO(mode))
-		printf("p");
+		ft_putstr("p");
 	else if (S_ISLNK(mode))
-		printf("l");
+		ft_putstr("l");
 	else if (S_ISSOCK(mode))
-		printf("s");
+		ft_putstr("s");
 	else if (S_ISDIR(mode))
-		printf("d");
+		ft_putstr("d");
 	else
-		printf("-");
+		ft_putstr("-");
 }
 
 void	print_right(mode_t mode)
 {
-	printf(mode & S_IRUSR ? "r" : "-");
-	printf(mode & S_IWUSR ? "w" : "-");
+	ft_putstr(mode & S_IRUSR ? "r" : "-");
+	ft_putstr(mode & S_IWUSR ? "w" : "-");
 	if (mode & S_IXUSR)
-		printf(mode & S_ISUID ? "s" : "x");
+		ft_putstr(mode & S_ISUID ? "s" : "x");
 	else
-		printf(mode & S_ISUID ? "S" : "-");
-	printf(mode & S_IRGRP ? "r" : "-");
-	printf(mode & S_IWGRP ? "w" : "-");
+		ft_putstr(mode & S_ISUID ? "S" : "-");
+	ft_putstr(mode & S_IRGRP ? "r" : "-");
+	ft_putstr(mode & S_IWGRP ? "w" : "-");
 	if (mode & S_IXGRP)
-		printf(mode & S_ISGID ? "s" : "x");
+		ft_putstr(mode & S_ISGID ? "s" : "x");
 	else
-		printf(mode & S_ISGID ? "S" : "-");
-	printf(mode & S_IROTH ? "r" : "-");
-	printf(mode & S_IWOTH ? "w" : "-");
-	printf(mode & S_IXOTH ? "x" : "-");
+		ft_putstr(mode & S_ISGID ? "S" : "-");
+	ft_putstr(mode & S_IROTH ? "r" : "-");
+	ft_putstr(mode & S_IWOTH ? "w" : "-");
+	ft_putstr(mode & S_IXOTH ? "x" : "-");
 }
 
 void	print_uid_gid(long *max_len, struct stat stat)
@@ -67,10 +67,10 @@ void	print_uid_gid(long *max_len, struct stat stat)
 		|| !(gid = getgrgid((long)stat.st_gid)))
 		exit(42);
 	put_n_space(1);
-	printf("%s", uid->pw_name);
+	ft_putstr(uid->pw_name);
 	put_n_space(max_len[2] - (long)ft_strlen(uid->pw_name) + 1);
 	put_n_space(1);
-	printf("%s", gid->gr_name);
+	ft_putstr(gid->gr_name);
 	put_n_space(max_len[3] - (long)ft_strlen(gid->gr_name) + 2);
 }
 

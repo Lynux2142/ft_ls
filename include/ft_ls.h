@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 14:49:41 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 16:23:12 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
-
-# include <stdio.h>
 
 # define DEFAULT_PATH	"."
 # define FLAG_LIST		"lRart"
@@ -58,5 +56,6 @@ void					make_dir_linked_list(t_list **list, char *file_name);
 void					make_err_linked_list(t_list **list, char *file_name);
 void					start_print(int *flag, t_list *err_list,
 							t_list *file_list, t_list *dir_list);
+int						list_len(t_list *list);
 
 #endif

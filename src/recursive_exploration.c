@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 13:37:45 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 15:09:13 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ static t_list	*make_linked_list(int *flag, DIR *d, char *dir_name)
 
 static void		print(int *flag, t_file *content)
 {
-	printf("%2$c%1$s:%2$c", content->name, 10);
+	ft_putstr("\n");
+	ft_putstr(content->name);
+	ft_putendl(":");
 	print_file(flag, content->name);
 	explore(flag, content->name);
 }
