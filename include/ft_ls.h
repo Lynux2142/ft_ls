@@ -6,21 +6,19 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 16:23:12 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/20 16:34:30 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 # define FT_LS_H
 
-# include <unistd.h>
 # include <dirent.h>
-# include "libft.h"
-# include <errno.h>
 # include <sys/stat.h>
 # include <pwd.h>
 # include <grp.h>
 # include <time.h>
+# include "libft.h"
 
 # define DEFAULT_PATH	"."
 # define FLAG_LIST		"lRart"
