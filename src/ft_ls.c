@@ -6,11 +6,18 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 14:00:58 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/21 13:17:42 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/21 15:44:32 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+static void	free_all_list(t_list *err_list, t_list *file_list, t_list *dir_list)
+{
+	free_linked_list(&err_list);
+	free_linked_list(&file_list);
+	free_linked_list(&dir_list);
+}
 
 static void	test_and_print_file(int *flag, char **files)
 {
@@ -38,6 +45,7 @@ static void	test_and_print_file(int *flag, char **files)
 			make_err_linked_list(&err_list, files[i]);
 	}
 	start_print(flag, err_list, file_list, dir_list);
+	free_all_list(err_list, file_list, dir_list);
 }
 
 int			main(int ac, char **av)
@@ -57,8 +65,10 @@ int			main(int ac, char **av)
 		print_file(flag, dir_name);
 		if (flag[1])
 			explore(flag, dir_name);
+		ft_memdel((void**)&dir_name);
 	}
 	else
 		test_and_print_file(flag, av + i);
+	ft_memdel((void**)&flag);
 	return (0);
 }
