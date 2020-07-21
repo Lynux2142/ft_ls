@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:43:14 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 16:28:56 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/21 13:17:57 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		make_err_linked_list(t_list **list, char *name)
 	ft_memdel((void**)&data);
 }
 
-static void print_dir(int *flag, t_list *dir_list, int nb_file)
+static void	print_dir(int *flag, t_list *dir_list, int nb_file)
 {
 	if (nb_file > 1)
 	{
