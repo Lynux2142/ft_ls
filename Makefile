@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 14:00:46 by lguiller          #+#    #+#              #
-#    Updated: 2020/07/20 16:22:58 by lguiller         ###   ########.fr        #
+#    Updated: 2020/07/23 13:56:32 by lguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ INCLUDES_DIR	= ./include
 LIBFT			= $(LIBFT_DIR)/libft.a
 HEADER			= $(INCLUDES_DIR)/ft_ls.h
 
-FLAGS			= -Wall -Wextra -g
+FLAGS			= -Wall -Wextra -Werror -g
 CC				= clang
 
 INCLUDES		= $(addprefix -I, $(INCLUDES_DIR) $(LIBFT_DIR))

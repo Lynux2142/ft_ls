@@ -4,3 +4,4 @@ obj
 obj/*
 ft_ls
 *.swp
+*.dSYM
