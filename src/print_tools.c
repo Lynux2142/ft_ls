@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 15:22:47 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/23 14:01:32 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/24 15:04:45 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,20 +50,38 @@ static void	print_time(long rawtime)
 
 static void	set_value(long *max_len, struct stat stat)
 {
-	struct passwd *pw;
-	struct group *grp;
-	long tmp;
+	struct passwd	*pw;
+	struct group	*grp;
+	long			tmp;
 
 	if ((tmp = nb_len((long)stat.st_nlink)) > max_len[1])
 		max_len[1] = tmp;
 	pw = getpwuid((long)stat.st_uid);
-	if ((tmp = (long)ft_strlen(pw->pw_name))
-		> max_len[2])
-		max_len[2] = tmp;
+	if (pw)
+	{
+		if ((tmp = (long)ft_strlen(pw->pw_name))
+			> max_len[2])
+			max_len[2] = tmp;
+	}
+	else
+	{
+		if ((tmp = (long)nb_len((int)stat.st_uid))
+			> max_len[2])
+			max_len[2] = tmp;
+	}
 	grp = getgrgid((long)stat.st_gid);
-	if ((tmp = (long)ft_strlen(grp->gr_name))
-		> max_len[3])
-		max_len[3] = tmp;
+	if (grp)
+	{
+		if ((tmp = (long)ft_strlen(grp->gr_name))
+			> max_len[3])
+			max_len[3] = tmp;
+	}
+	else
+	{
+		if ((tmp = (long)nb_len((int)stat.st_gid))
+			> max_len[3])
+			max_len[3] = tmp;
+	}
 	if ((tmp = nb_len((long)stat.st_size)) > max_len[4])
 		max_len[4] = tmp;
 }
