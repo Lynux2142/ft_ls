@@ -6,7 +6,7 @@
 #    By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/06/26 14:00:46 by lguiller          #+#    #+#              #
-#    Updated: 2020/07/23 13:56:32 by lguiller         ###   ########.fr        #
+#    Updated: 2020/07/24 13:44:20 by lguiller         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,10 +92,10 @@ $(LIBFT): FORCE
 FORCE:
 
 $(NAME): $(OBJS_DIR) $(OBJS)
-	gcc $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJS): $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(HEADER)
-	gcc $(FLAGS) $(INCLUDES) -c $< -o $@
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $@
 	printf $<
 
 clean:
