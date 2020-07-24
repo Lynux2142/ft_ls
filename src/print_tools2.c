@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:40:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/24 15:03:42 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/24 17:55:41 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,26 +67,16 @@ void	print_uid_gid(long *max_len, struct stat stat)
 	gid = getgrgid((long)stat.st_gid);
 	put_n_space(1);
 	if (uid)
-	{
 		ft_putstr(uid->pw_name);
-		put_n_space(max_len[2] - (long)ft_strlen(uid->pw_name) + 1);
-	}
 	else
-	{
 		ft_putnbr((int)stat.st_uid);
-		put_n_space(max_len[2] - (long)nb_len(stat.st_uid) + 1);
-	}
+	put_n_space(max_len[2] - ((uid) ? (long)ft_strlen(uid->pw_name) : (long)nb_len(stat.st_uid)) + 1);
 	put_n_space(1);
 	if (gid)
-	{
 		ft_putstr(gid->gr_name);
-		put_n_space(max_len[3] - (long)ft_strlen(gid->gr_name) + 2);
-	}
 	else
-	{
 		ft_putnbr((int)stat.st_gid);
-		put_n_space(max_len[3] - (long)nb_len(stat.st_gid) + 2);
-	}
+	put_n_space(max_len[3] - ((gid) ? (long)ft_strlen(gid->gr_name) : (long)nb_len(stat.st_gid)) + 2);
 }
 
 long	get_month_diff(long file_rawtime)
