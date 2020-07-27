@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 15:22:47 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/27 14:21:14 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/27 14:34:28 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static long	*set_max_len(t_list *file_list)
 	if (is_list_empty)
 	{
 		ft_putstr("total ");
-		ft_putnbr((int)total / 2);
+		ft_putnbr((ft_strequ(SYSTEM, "mac")) ? (int)total : (int)total / 2);
 		ft_putstr("\n");
 	}
 	return (max_len);

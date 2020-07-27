@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 16:34:30 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/27 14:33:15 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 # define DEFAULT_PATH	"."
 # define FLAG_LIST		"lRart"
 # define SEC_TO_MONTH	2592000
+
+# if __linux__
+#  define SYSTEM "linux"
+# elif __APPLE__
+#  define SYSTEM "mac"
+# else
+#  define SYSTEM "win"
+# endif
 
 typedef struct			s_file
 {
