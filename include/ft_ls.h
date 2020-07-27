@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/27 14:33:15 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/27 14:36:10 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@
 
 # if __linux__
 #  define SYSTEM "linux"
-# elif __APPLE__
-#  define SYSTEM "mac"
 # else
-#  define SYSTEM "win"
+#  define SYSTEM "mac"
 # endif
 
 typedef struct			s_file
