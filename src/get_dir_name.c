@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/16 15:04:41 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/16 15:05:14 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:10:22 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char			*get_dir_name(char *path)
 
 	path_len = ft_strlen(path);
 	i = path_len - 1;
-	while (path[i])
+	while (i >= 0)
 	{
 		if (path[i] == '/')
 			break ;
