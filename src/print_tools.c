@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/09 15:22:47 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/27 13:04:23 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/27 14:21:14 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ static long	*set_max_len(t_list *file_list)
 	if (is_list_empty)
 	{
 		ft_putstr("total ");
-		ft_putnbr((int)total);
+		ft_putnbr((int)total / 2);
 		ft_putstr("\n");
 	}
 	return (max_len);
@@ -111,7 +111,7 @@ void		full_print(t_list *file_list)
 		put_n_space(max_len[1] - nb_len((long)stat.st_nlink) + 2);
 		ft_putnbr((int)stat.st_nlink);
 		print_uid_gid(max_len, stat);
-		put_n_space(max_len[4] - nb_len((long)stat.st_size));
+		put_n_space(max_len[4] - nb_len((long)stat.st_size) + 2);
 		ft_putnbr((int)stat.st_size);
 		print_time(stat.st_mtime);
 		ft_putendl(((t_file*)file_list->content)->name);
