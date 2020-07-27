@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 13:59:20 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/27 14:36:10 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:23:12 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct			s_file
 }						t_file;
 
 void					sort_file_list(int *flag, t_list *file_list);
-void					print_file(int *flag, char *dir_name);
+int						print_file(int *flag, char *dir_name);
 void					explore(int *flag, char *dir_name);
 void					free_linked_list(t_list **list);
 int						*get_flag(char **av);

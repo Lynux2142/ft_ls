@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/30 15:29:38 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/20 15:09:13 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/27 15:36:33 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ static void		print(int *flag, t_file *content)
 	ft_putstr("\n");
 	ft_putstr(content->name);
 	ft_putendl(":");
-	print_file(flag, content->name);
-	explore(flag, content->name);
+	if (print_file(flag, content->name))
+		explore(flag, content->name);
 }
 
 void			explore(int *flag, char *dir_name)
