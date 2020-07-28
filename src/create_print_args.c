@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/20 14:43:14 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/27 15:31:32 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/07/28 13:32:47 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void	print_dir(int *flag, t_list *dir_list, int nb_file)
 		ft_putstr(((t_file*)dir_list->content)->name);
 		ft_putendl(":");
 	}
-	if (flag[1] && print_file(flag, ((t_file*)dir_list->content)->name))
+	if (print_file(flag, ((t_file*)dir_list->content)->name) && flag[1])
 		explore(flag, ((t_file*)dir_list->content)->name);
 	if (dir_list->next)
 		ft_putstr("\n");
