@@ -6,7 +6,7 @@
 /*   By: lguiller <lguiller@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/15 13:40:09 by lguiller          #+#    #+#             */
-/*   Updated: 2020/07/27 14:24:26 by lguiller         ###   ########.fr       */
+/*   Updated: 2020/09/29 13:25:19 by lguiller         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,21 @@ void	print_mode(mode_t mode)
 
 void	print_right(mode_t mode)
 {
-	ft_putstr(mode & S_IRUSR ? "r" : "-");
-	ft_putstr(mode & S_IWUSR ? "w" : "-");
-	if (mode & S_IXUSR)
-		ft_putstr(mode & S_ISUID ? "s" : "x");
-	else
-		ft_putstr(mode & S_ISUID ? "S" : "-");
-	ft_putstr(mode & S_IRGRP ? "r" : "-");
-	ft_putstr(mode & S_IWGRP ? "w" : "-");
-	if (mode & S_IXGRP)
-		ft_putstr(mode & S_ISGID ? "s" : "x");
-	else
-		ft_putstr(mode & S_ISGID ? "S" : "-");
-	ft_putstr(mode & S_IROTH ? "r" : "-");
-	ft_putstr(mode & S_IWOTH ? "w" : "-");
-	ft_putstr(mode & S_IXOTH ? "x" : "-");
+	static const char	*rwx[] = {"---", "--x", "-w-", "-wx", "r--", "r-x",
+		"rw-", "rwx"};
+	char				bits[10];
+
+	ft_strcpy(&bits[0], rwx[(mode >> 6) & 7]);
+	ft_strcpy(&bits[3], rwx[(mode >> 3) & 7]);
+	ft_strcpy(&bits[6], rwx[mode & 7]);
+	if (mode & S_ISUID)
+		bits[2] = (mode & S_IXUSR) ? 's' : 'S';
+	if (mode & S_ISGID)
+		bits[5] = (mode & S_IXGRP) ? 's' : 'S';
+	if (mode & S_ISVTX)
+		bits[8] = (mode & S_IXOTH) ? 't' : 'T';
+	bits[9] = '\0';
+	ft_putstr(bits);
 }
 
 void	print_uid_gid(long *max_len, struct stat stat)
